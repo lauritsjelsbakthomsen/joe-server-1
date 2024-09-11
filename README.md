@@ -119,7 +119,8 @@ sudo systemctl disable nginx
 
 sudo systemctl enable nginx
 
+## Linux kommandoer
 
-
+[Link til oversigt](https://www.geeksforgeeks.org/linux-commands-cheat-sheet/)
 
 
