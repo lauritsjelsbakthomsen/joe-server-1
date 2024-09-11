@@ -1,6 +1,6 @@
 # joe-server install
 
-git clone https://github.com/miwnKEA/joe-server.git
+git clone https://github.com/mwndigi/joe-server.git
 
 cd joe-server
 
