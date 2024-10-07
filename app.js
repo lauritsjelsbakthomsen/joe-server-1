@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/res", (req, res) => {
-  res.status(200).send("Response message from server");
+  res.status(200).send("Respeonse message from server");
 });
 
 app.listen(3000, () => {
