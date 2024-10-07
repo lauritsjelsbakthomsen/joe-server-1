@@ -22,10 +22,7 @@ async function fetchData() {
     console.log(data);
 
     responeParagraph.textContent =
-      "URL " +
-      response.url +
-      " og status iueleuehlukoden er " +
-      response.status;
+      "URL " + response.url + " og status er " + response.status;
   } catch (error) {
     console.log(error);
   }
