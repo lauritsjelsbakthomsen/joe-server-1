@@ -1,15 +1,34 @@
 let responseDom = document.getElementById("response");
 
-function getResponse() {
-  axios
-    .get("/res")
-    .then(function (response) {
-      // handle success
-      console.log(response);
-      responseDom.innerHTML = response.data;
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    });
+let btn = document.getElementById("fetchButton");
+
+let responeParagraph = document.getElementById("response");
+
+console.log(responeParagraph);
+
+console.log(btn);
+
+async function fetchData() {
+  try {
+    let url = "/res";
+
+    let response = await fetch(url);
+
+    if (!response.ok) {
+      throw error;
+    }
+    let data = await response;
+
+    console.log(data);
+
+    responeParagraph.textContent =
+      "URL " + response.url + " og status koden er " + response.status;
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+btn.addEventListener("click", function () {
+  console.log("click");
+  fetchData();
+});
