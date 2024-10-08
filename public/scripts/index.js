@@ -13,9 +13,8 @@ async function fetchData(url) {
     if (!response.ok) {
       throw new Error();
     }
-    let data = await response;
 
-    console.log(data);
+    console.log(response);
 
     responeParagraph.textContent =
       "URL " + response.url + " og status er " + response.status;
@@ -86,7 +85,7 @@ async function postCookie(location) {
     body: JSON.stringify(data),
   };
 
-  let url = "/cookie";
+  let url = "cookie";
   try {
     let response = await fetch(url, options);
 
