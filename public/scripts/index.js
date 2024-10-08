@@ -91,7 +91,7 @@ async function postCookie(location) {
     let response = await fetch(url, options);
 
     if (!response.ok) {
-      throw new error(message);
+      throw new error();
     }
   } catch (error) {
     console.log(error);
