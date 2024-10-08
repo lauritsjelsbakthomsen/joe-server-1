@@ -32,7 +32,7 @@ app.post("/cookie", (req, res) => {
 
   res.cookie("location", req.body.location, {
     maxAge: 200000,
-    secure: true, // Only send cookies over HTTPS (may break in localhost without HTTPS)
+    secure: false, // Only send cookies over HTTPS (may break in localhost without HTTPS)
     httpOnly: true, // Optional: prevent JavaScript access to the cookie
   });
 
