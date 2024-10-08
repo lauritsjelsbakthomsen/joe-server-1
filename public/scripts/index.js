@@ -11,7 +11,7 @@ async function fetchData(url) {
     let response = await fetch(url);
 
     if (!response.ok) {
-      throw error;
+      throw new Error();
     }
     let data = await response;
 
@@ -33,7 +33,7 @@ async function fetchLocation() {
     let response = await fetch(url);
 
     if (!response.ok) {
-      throw error;
+      throw new Error();
     }
     let data = await response.json();
 
@@ -49,7 +49,7 @@ async function fetchLocation() {
 
     console.log(data[0].address.city);
 
-    fetchWeather(long, lat);
+    await fetchWeather(long, lat);
 
     await postCookie(data[0].address.city);
   } catch (error) {
@@ -64,7 +64,7 @@ async function fetchWeather(long, lat) {
     let response = await fetch(url);
 
     if (!response.ok) {
-      throw error;
+      throw new Error();
     }
     let data = await response.json();
 
