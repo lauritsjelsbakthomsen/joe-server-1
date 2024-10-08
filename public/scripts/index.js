@@ -51,7 +51,7 @@ async function fetchLocation() {
 
     fetchWeather(long, lat);
 
-    postCookie("/cookie", data[0].address.city);
+    await postCookie("/cookie", data[0].address.city);
   } catch (error) {
     console.log(error);
   }
@@ -95,8 +95,8 @@ async function postCookie(url, location) {
   }
 }
 
-btn.addEventListener("click", function () {
+btn.addEventListener("click", async () => {
   console.log("click");
-  fetchData("/res");
-  fetchLocation();
+  await fetchData("/res");
+  await fetchLocation();
 });
