@@ -1,9 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const cookieParser = require("cookie-parser");
+const e = require("cors");
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
+app.use(express.json());
 app.use("/static", express.static("public"));
 app.use((req, res, next) => {
   console.log("----- HTTP Request -----");
@@ -20,7 +24,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/res", (req, res) => {
-  res.status(200).send("Respeonse meshbflqwiufeblufisage from server");
+  res.status(200).send("Response from server");
+});
+
+app.post("/cookie", (req, res) => {
+  console.log(req.body.location);
+
+  res.cookie("location", req.body.location, { maxAge: 2000 });
+
+  res.status(200).send("Cookie has been made");
 });
 
 app.listen(3000, () => {

@@ -28,7 +28,7 @@ async function fetchData(url) {
 
 async function fetchLocation() {
   try {
-    const locationName = "Copenhagen";
+    const locationName = "Sydney";
     let url = `https://nominatim.openstreetmap.org/search?q=${locationName}&format=json&addressdetails=1
 `;
 
@@ -49,7 +49,11 @@ async function fetchLocation() {
 
     let lat = data[0].lat;
 
+    console.log(data[0].address.city);
+
     fetchWeather(long, lat);
+
+    postCookie("/cookie", data[0].address.city);
   } catch (error) {
     console.log(error);
   }
@@ -69,6 +73,27 @@ async function fetchWeather(long, lat) {
     console.log(data);
   } catch (error) {
     console.log(error);
+  }
+}
+
+async function postCookie(url, location) {
+  let data = {
+    location: location,
+  };
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+
+  let response = fetch(url, options);
+
+  if (!response.ok) {
+    return "Kunne ikke poste en cookie";
+  } else {
+    return "Har oprette en cookie";
   }
 }
 
