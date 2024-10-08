@@ -85,13 +85,14 @@ async function postCookie(url, location) {
     },
     body: JSON.stringify(data),
   };
+  try {
+    let response = await fetch(url, options);
 
-  let response = await fetch(url, options);
-
-  if (!response.ok) {
-    return "Kunne ikke poste en cookie";
-  } else {
-    return "Har oprette en cookie";
+    if (!response.ok) {
+      throw new error(message);
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
 
