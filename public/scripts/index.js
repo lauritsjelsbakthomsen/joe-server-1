@@ -85,7 +85,7 @@ async function postCookie(location) {
     body: JSON.stringify(data),
   };
 
-  let url = "cookie";
+  let url = "/cookie";
   try {
     let response = await fetch(url, options);
 
