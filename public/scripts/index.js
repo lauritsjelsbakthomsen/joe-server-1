@@ -1,5 +1,3 @@
-let responseDom = document.getElementById("response");
-
 let btn = document.getElementById("fetchButton");
 
 let responeParagraph = document.getElementById("response");
@@ -88,7 +86,7 @@ async function postCookie(url, location) {
     body: JSON.stringify(data),
   };
 
-  let response = fetch(url, options);
+  let response = await fetch(url, options);
 
   if (!response.ok) {
     return "Kunne ikke poste en cookie";

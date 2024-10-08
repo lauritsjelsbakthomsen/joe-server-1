@@ -30,7 +30,7 @@ app.get("/res", (req, res) => {
 app.post("/cookie", (req, res) => {
   console.log(req.body.location);
 
-  res.cookie("location", req.body.location, { maxAge: 200000 });
+  res.cookie("location", req.body.location, { maxAge: 20000 });
 
   res.status(200).send("Cookie has been made");
 });
