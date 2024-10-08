@@ -51,7 +51,7 @@ async function fetchLocation() {
 
     fetchWeather(long, lat);
 
-    await postCookie("/cookie", data[0].address.city);
+    await postCookie(data[0].address.city);
   } catch (error) {
     console.log(error);
   }
@@ -74,7 +74,7 @@ async function fetchWeather(long, lat) {
   }
 }
 
-async function postCookie(url, location) {
+async function postCookie(location) {
   let data = {
     location: location,
   };
@@ -85,6 +85,8 @@ async function postCookie(url, location) {
     },
     body: JSON.stringify(data),
   };
+
+  let url = "/cookie";
   try {
     let response = await fetch(url, options);
 

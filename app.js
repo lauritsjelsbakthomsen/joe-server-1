@@ -30,7 +30,11 @@ app.get("/res", (req, res) => {
 app.post("/cookie", (req, res) => {
   console.log(req.body.location);
 
-  res.cookie("location", req.body.location, { maxAge: 20000 });
+  res.cookie("location", req.body.location, {
+    maxAge: 200000,
+    secure: true, // Only send cookies over HTTPS (may break in localhost without HTTPS)
+    httpOnly: true, // Optional: prevent JavaScript access to the cookie
+  });
 
   res.status(200).send("Cookie has been made");
 });
