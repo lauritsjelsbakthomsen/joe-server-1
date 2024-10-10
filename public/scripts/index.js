@@ -16,6 +16,8 @@ async function fetchData(url) {
 
     console.log(response);
 
+    console.log(`Response time ${response.headers.get("X-Response-Time")}`);
+
     responeParagraph.textContent =
       "URL " + response.url + " og status er " + response.status;
   } catch (error) {
