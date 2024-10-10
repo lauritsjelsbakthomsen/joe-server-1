@@ -26,8 +26,7 @@ async function fetchData(url) {
 async function fetchLocation() {
   try {
     const locationName = "Sydney";
-    let url = `https://nominatim.openstreetmap.org/search?q=${locationName}&format=json&addressdetails=1
-`;
+    let url = `https://nominatim.openstreetmap.org/search?q=${locationName}&format=json&addressdetails=1`;
 
     let response = await fetch(url);
 

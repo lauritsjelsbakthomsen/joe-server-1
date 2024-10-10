@@ -28,10 +28,10 @@ app.get("/res", (req, res) => {
 });
 
 app.post("/cookie", (req, res) => {
-  console.log(req.body.location);
+  console.log(req.body.location); // Logger lokationen
 
   res.cookie("location", req.body.location, {
-    maxAge: 200000,
+    maxAge: 200000, // varighed på 2 min
   });
 
   res.status(200).send("Cookie has been made");
