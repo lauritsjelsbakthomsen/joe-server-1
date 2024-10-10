@@ -38,6 +38,9 @@ app.get("/response-time", (req, res) => {
 });
 
 app.get("/res", (req, res) => {
+  console.log("cookies");
+
+  console.log(req.cookies);
   res.status(200).send("Response from server");
 });
 
@@ -54,3 +57,10 @@ app.post("/cookie", (req, res) => {
 app.listen(3000, () => {
   console.log("Server listening on port 3000");
 });
+
+app.get("/allCookies", (req, res) => {
+  console.log(req.cookies);
+
+  res.status(200).json(req.cookies);
+});
+// Hvis man gerne vl have fat i cookies, kan man sende dem vi et endpoint i res.send

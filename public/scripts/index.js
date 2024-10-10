@@ -1,6 +1,6 @@
 let btn = document.getElementById("fetchButton");
-
 let responeParagraph = document.getElementById("response");
+let responseTime = document.getElementById("responseTime");
 
 console.log(responeParagraph);
 
@@ -8,15 +8,33 @@ console.log(btn);
 
 async function fetchData(url) {
   try {
-    let response = await fetch(url);
+    let response = await fetch(url, {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    });
 
     if (!response.ok) {
       throw new Error();
     }
 
-    console.log(response);
+    console.log("Headers");
+
+    console.log(response.headers);
 
     console.log(`Response time ${response.headers.get("X-Response-Time")}`);
+
+    responseTime.textContent = `Response time for ${
+      response.url
+    }, ${response.headers.get("X-Response-Time")}`;
+
+    console.log(
+      `Size of response body in bytes ${response.headers.get("Content-Length")}`
+    );
+
+    console.log(`Date ${response.headers.get("Date")}`);
+
+    console.log(navigator.userAgent);
 
     responeParagraph.textContent =
       "URL " + response.url + " og status er " + response.status;
