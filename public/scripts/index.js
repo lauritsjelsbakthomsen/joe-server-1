@@ -43,6 +43,51 @@ async function fetchData(url) {
   }
 }
 
+// Ping server:
+
+async function resTime() {
+  try {
+    let response = await fetch("/");
+
+    if (!response.ok) {
+      throw new Error("could not ping");
+    }
+
+    console.log(response);
+
+    console.log(
+      `Response time (Ping) ${response.headers.get("X-Response-Time")}`
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function RTT() {
+  let currentDate = Date.now();
+  //console.log(`Current date ${currentDate}`);
+  console.log("PING");
+
+  try {
+    let response = await fetch("/res");
+
+    if (response.ok) {
+      let endTime = Date.now();
+      let RTT = endTime - currentDate;
+
+      let data = await response.json();
+
+      let responseTime = endTime - data.time;
+
+      console.log(`RTT time: ${RTT} ms`);
+
+      console.log(`Response time: ${responseTime} ms`);
+    }
+  } catch (error) {
+    console.log("Der skete en fejl");
+  }
+}
+
 async function fetchLocation() {
   try {
     const locationName = "Sydney";
@@ -118,4 +163,13 @@ btn.addEventListener("click", async () => {
   console.log("click");
   await fetchData("/res");
   await fetchLocation();
+  //RTT();
+  let counter = 0;
+  const intervalID = setInterval(() => {
+    counter++;
+    RTT();
+    if (counter >= 10) {
+      clearInterval(intervalID);
+    }
+  }, 1000);
 });

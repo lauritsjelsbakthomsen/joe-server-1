@@ -38,10 +38,9 @@ app.get("/response-time", (req, res) => {
 });
 
 app.get("/res", (req, res) => {
-  console.log("cookies");
+  let currentDate = Date.now();
 
-  console.log(req.cookies);
-  res.status(200).send("Response from server");
+  res.status(200).send({ message: "Response from server", time: currentDate });
 });
 
 app.post("/cookie", (req, res) => {
