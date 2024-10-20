@@ -40,7 +40,9 @@ app.get("/response-time", (req, res) => {
 app.get("/res", (req, res) => {
   let currentDate = Date.now();
 
-  res.status(200).send({ message: "Response from server", time: currentDate });
+  res
+    .status(200)
+    .send({ message: "Responeeese from server", time: currentDate });
 });
 
 app.post("/cookie", (req, res) => {
@@ -53,13 +55,14 @@ app.post("/cookie", (req, res) => {
   res.status(200).send("Cookie added");
 });
 
-app.listen(3000, () => {
-  console.log("Server listening on port 3000");
-});
-
 app.get("/allCookies", (req, res) => {
   console.log(req.cookies);
 
   res.status(200).json(req.cookies);
 });
+
+app.listen(3000, () => {
+  console.log("Server listening on port 3000");
+});
+
 // Hvis man gerne vl have fat i cookies, kan man sende dem vi et endpoint i res.send
