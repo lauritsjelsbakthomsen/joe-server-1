@@ -18,7 +18,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
-app.use("/static", express.static("public"));
+app.use(express.static("public"));
 app.use((req, res, next) => {
   console.log("----- HTTP Request -----");
   console.log(`Method: ${req.method}`); // HTTP Method
@@ -45,6 +45,12 @@ app.get("/res", (req, res) => {
     .send({ message: "Responeeese from server", time: currentDate });
 });
 
+app.get("/viggo", (req, res) => {
+  console.log("Viggo billede");
+
+  res.sendFile(path.join(__dirname, "public", "viggo.html"));
+});
+
 app.post("/cookie", (req, res) => {
   console.log(req.body.location); // Logger lokationen
 
@@ -60,6 +66,78 @@ app.get("/allCookies", (req, res) => {
 
   res.status(200).json(req.cookies);
 });
+
+const sqlite3 = require("sqlite3").verbose();
+
+// Connect to SQLite database (creates a new one if it doesn't exist)
+const db = new sqlite3.Database("mydatabase.db", (err) => {
+  if (err) {
+    console.error("Error opening database:", err.message);
+  } else {
+    console.log("Connected to the SQLite database.");
+  }
+});
+
+// Step 3: Define Functions to Work with the Database
+
+// Function to create a table
+const createTable = () => {
+  const sql = `CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        age INTEGER NOT NULL
+    )`;
+  db.run(sql, (err) => {
+    if (err) {
+      return console.error("Error creating table:", err.message);
+    }
+    console.log("Table created successfully.");
+  });
+};
+
+const createUser = (name, age) => {
+  const sql = `INSERT INTO users (name, age) VALUES (?, ?)`;
+
+  db.run(sql, [name, age], function (err) {
+    if (err) {
+      return console.error("Error creating user:", err.message);
+    }
+    console.log(`User created successfully with ID: ${this.lastID}`);
+  });
+};
+
+const getAllUsers = () => {
+  const sql = `SELECT * FROM users`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      return console.error("Error getting user:", err.message);
+    }
+    // Convert the result to JSON format if needed, or simply log rows
+    console.log(rows);
+  });
+};
+
+const dropAllData = () => {
+  const sql = `DELETE FROM users;`; // This will delete all records from the users table
+
+  db.run(sql, (err) => {
+    if (err) {
+      return console.error("Error dropping all data:", err.message);
+    }
+    console.log("All data dropped successfully from the users table.");
+  });
+};
+
+db.serialize(() => {
+  // createTable();
+  // createUser("Seb", 33);
+  // createUser("Lau", 11);
+  getAllUsers();
+  //dropAllData();
+});
+
+db.close();
 
 app.listen(3000, () => {
   console.log("Server listening on port 3000");

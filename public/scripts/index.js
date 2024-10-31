@@ -63,25 +63,19 @@ async function resTime() {
   }
 }
 
+let averageRTT = [];
+
 async function RTT() {
   let currentDate = Date.now();
-  //console.log(`Current date ${currentDate}`);
-  console.log("PING");
 
   try {
     let response = await fetch("/res");
 
     if (response.ok) {
       let endTime = Date.now();
-      let RTT = endTime - currentDate;
+      let RTT = endTime - currentDate; // Her udregnes RTT
 
-      let data = await response.json();
-
-      let responseTime = endTime - data.time;
-
-      console.log(`RTT time: ${RTT} ms`);
-
-      console.log(`Response time: ${responseTime} ms`);
+      console.log("RTT");
     }
   } catch (error) {
     console.log("Der skete en fejl");
@@ -163,13 +157,14 @@ btn.addEventListener("click", async () => {
   console.log("click");
   await fetchData("/res");
   await fetchLocation();
-  //RTT();
-  let counter = 0;
-  const intervalID = setInterval(() => {
-    counter++;
-    RTT();
-    if (counter >= 10) {
-      clearInterval(intervalID);
-    }
-  }, 1000);
+
+  console.log("hej");
+
+  for (let i = 0; i < 10; i++) {
+    await RTT();
+  }
+
+  console.log("Array: " + averageRTT);
+
+  console.log(averageRTT);
 });
