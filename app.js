@@ -117,7 +117,7 @@ const getAllUsers = () => {
     console.log(rows);
   });
 };
-
+// ejej
 const dropAllData = () => {
   const sql = `DELETE FROM users;`; // This will delete all records from the users table
 
